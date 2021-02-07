@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from tkinter import ttk
 import tkinter as tk
 
@@ -11,7 +12,7 @@ root.geometry("1000x800")
 
 pw = tk.PanedWindow(root, orient="horizontal", sashwidth=4, sashrelief="sunken")
 pw.pack(expand=True, fill="both")
-pw2 = tk.PanedWindow(pw, orient="vertical", sashwidth=4, sashrelief="sunken")
+pw2 = ttk.PanedWindow(pw, orient="vertical", sashwidth=4, sashrelief="sunken")
 
 frame1 = tk.Frame(pw2)
 class search_box_input:
@@ -77,12 +78,24 @@ sai = signal_all_listbox()
 
 
 frame2 = tk.Frame(pw2)
-button2 = ttk.Button(frame2, text="hoahoa")
-button2.pack()
+
 
 frame3 = tk.Frame(pw)
-button3 = ttk.Button(frame3, text="hoahoa")
-button3.pack()
+class matplot_frame:
+    def __init__(self):
+        self.frame = tk.Frame(frame3)
+        self.frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        self.fig = plt.figure()
+        self.ax = self.fig.add_subplot(1,1,1)
+        self.ax.plot([1,2,4,5], [4,5,6,7])
+        self.canvas = FigureCanvasTkAgg(self.fig, master=self.frame)
+        self.canvas.draw()
+        self.canvas.get_tk_widget().pack(expand=True, fill="both")
+        self.toolbar = NavigationToolbar2Tk(self.canvas, self.frame)
+        self.toolbar.update()
+        self.canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+matplot_frame()
 
 
 
