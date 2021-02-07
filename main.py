@@ -12,7 +12,7 @@ root.geometry("1000x800")
 
 pw = tk.PanedWindow(root, orient="horizontal", sashwidth=4, sashrelief="sunken")
 pw.pack(expand=True, fill="both")
-pw2 = ttk.PanedWindow(pw, orient="vertical", sashwidth=4, sashrelief="sunken")
+pw2 = tk.PanedWindow(pw, orient="vertical", sashwidth=4, sashrelief="sunken")
 
 frame1 = tk.Frame(pw2)
 class search_box_input:
@@ -83,6 +83,10 @@ frame2 = tk.Frame(pw2)
 frame3 = tk.Frame(pw)
 class matplot_frame:
     def __init__(self):
+        self.upper_frame = tk.Frame(frame3)
+        self.button1 = tk.Button(self.upper_frame, text="upp")
+        self.button1.pack(side=tk.TOP)
+        self.upper_frame.pack(side=tk.RIGHT, fill="y")
         self.frame = tk.Frame(frame3)
         self.frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.fig = plt.figure()
